@@ -47,12 +47,12 @@ app.get('/redis/getJson/:sessionid', async (req, res) => {
     };
     console.log('**** Antes de delay ****', req.params.sessionid);
     var sessionId = req.params.sessionid;
-    // await new Promise(resolve => setTimeout(resolve, 5000)); // 5 sec
+    await new Promise(resolve => setTimeout(resolve, 5000)); // 5 sec
     let json = await axios.get('http://suing.logesta.com:8011/redis/getJson/' + sessionId);
-    console.log(json);
+    console.log(JSON.stringify(json.data));
     console.log('**** Despues de delay ****', req.params.sessionid);
-    // res.status(200).send(json.data);
-    res.status(500).send('Internal ERROR');
+    res.status(200).send(json.data);
+    // res.status(500).send('Internal ERROR');
 });
 app.get('/redisMock/getJson/:sessionid', async (req, res) => {
     respuesta = {
