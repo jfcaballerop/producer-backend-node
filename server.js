@@ -23,7 +23,20 @@ let respuesta = {
     mensaje: '',
     datos: {}
 };
+app.get('/mockSendResponse', async (req, res) => {
+    respuesta = {
+        error: true,
+        codigo: 200,
+        mensaje: 'Punto de inicio',
+        datos: movies
+    };
+    console.log('**** Antes de delay ****', req.params.id);
+    // await new Promise(resolve => setTimeout(resolve, 5000)); // 5 sec
 
+    // setDelay(30000); //30 sec
+    console.log('**** Despues de delay ****', req.params.id);
+    res.status(588).send('CB error');
+});
 app.get('/api/movies/:id', async (req, res) => {
     respuesta = {
         error: true,
@@ -38,6 +51,7 @@ app.get('/api/movies/:id', async (req, res) => {
     console.log('**** Despues de delay ****', req.params.id);
     res.status(200).send(respuesta);
 });
+
 app.get('/redis/getJson/:sessionid', async (req, res) => {
     respuesta = {
         error: true,
